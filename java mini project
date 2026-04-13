@@ -1,0 +1,91 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class CourseRecommendationSystem extends JFrame implements ActionListener {
+
+    JLabel nameLabel, skillLabel, interestLabel, resultLabel;
+    JTextField nameField;
+    JComboBox<String> skillBox, interestBox;
+    JButton recommendBtn;
+
+    public CourseRecommendationSystem() {
+
+        setTitle("Course Recommendation & Skill Tracking System");
+        setSize(500, 400);
+        setLayout(new FlowLayout());
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        nameLabel = new JLabel("Enter Name:");
+        skillLabel = new JLabel("Select Skill Level:");
+        interestLabel = new JLabel("Select Interest:");
+
+        nameField = new JTextField(15);
+
+        String[] skills = {"Beginner", "Intermediate", "Advanced"};
+        skillBox = new JComboBox<>(skills);
+
+        String[] interests = {"Java", "Python", "Web Development"};
+        interestBox = new JComboBox<>(interests);
+
+        recommendBtn = new JButton("Get Recommendation");
+        recommendBtn.addActionListener(this);
+
+        resultLabel = new JLabel("Recommended Course will appear here");
+
+        
+        add(nameLabel);
+        add(nameField);
+        add(skillLabel);
+        add(skillBox);
+        add(interestLabel);
+        add(interestBox);
+        add(recommendBtn);
+        add(resultLabel);
+    }
+
+     
+    public void actionPerformed(ActionEvent e) {
+
+        String name = nameField.getText();
+        String skill = (String) skillBox.getSelectedItem();
+        String interest = (String) interestBox.getSelectedItem();
+
+        String recommendation = "";
+
+        if (interest.equals("Java")) {
+            if (skill.equals("Beginner"))
+                recommendation = "Learn Core Java";
+            else if (skill.equals("Intermediate"))
+                recommendation = "Learn Advanced Java & JDBC";
+            else
+                recommendation = "Spring Boot & Microservices";
+        }
+
+        else if (interest.equals("Python")) {
+            if (skill.equals("Beginner"))
+                recommendation = "Python Basics";
+            else if (skill.equals("Intermediate"))
+                recommendation = "Data Science with Python";
+            else
+                recommendation = "Machine Learning & AI";
+        }
+
+        else if (interest.equals("Web Development")) {
+            if (skill.equals("Beginner"))
+                recommendation = "HTML, CSS, JavaScript";
+            else if (skill.equals("Intermediate"))
+                recommendation = "React JS / Node JS";
+            else
+                recommendation = "Full Stack Development";
+        }
+
+        resultLabel.setText("Hello " + name + ", Recommended: " + recommendation);
+    }
+
+    public static void main(String[] args) {
+        new CourseRecommendationSystem().setVisible(true);
+    }
+}
+
+
